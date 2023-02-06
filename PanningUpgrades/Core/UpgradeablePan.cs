@@ -155,10 +155,10 @@ namespace PanningUpgrades
 
             List<Vector2> tileLocations = this.tilesAffected(power);
 
-            int minX = int.MaxValue;
-            int minY = int.MaxValue;
-            int maxX = int.MinValue;
-            int maxY = int.MinValue;
+            float minX = float.MaxValue;
+            float minY = float.MaxValue;
+            float maxX = float.MinValue;
+            float maxY = float.MinValue;
             foreach (Vector2 tileLocation in tileLocations)
             {
                 if (minX > tileLocation.X)
@@ -179,11 +179,12 @@ namespace PanningUpgrades
                 }
             }
 
-            // Expand the range by 1 in each direction to match vanilla behaviour
-            minX -= 1;
-            minY -= 1;
-            maxX += 1;
-            maxY += 1;
+            // Expand the range by 1 in each direction to match vanilla behaviour, plus upgrade level multiplier
+            float skew = 1 + (ModEntry.Config.UpgradeRadiusMultiplier * this.UpgradeLevel);
+            minX -= skew;
+            minY -= skew;
+            maxX += skew;
+            maxY += skew;
 
             Log.Trace($"Panninng square {minX},{minY} to {maxX},{maxY}.  Does it contain {who.currentLocation.orePanPoint.X},{who.currentLocation.orePanPoint.Y}");
 

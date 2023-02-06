@@ -30,6 +30,9 @@ namespace PanningUpgrades
         [ConfigOption(Min = 0, Max = 1, Interval = 0.01f)]
         public float LuckLevelMultiplier { get; set; } = 0.1f;
 
+        [ConfigOption(Min = 0, Max = 1, Interval = 0.25f)]
+        public float UpgradeRadiusMultiplier { get; set; } = 0.5f;
+
         [ConfigSectionTitle("AnimationSection")]
 
         [ConfigParagraph("AnimationSectionText")]
